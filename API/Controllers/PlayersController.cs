@@ -1,13 +1,13 @@
 using API.Data;
 using API.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
-[ApiController]
-[Route("api/[controller]")] // /api/players
-public class PlayersController : ControllerBase
+[Authorize]
+public class PlayersController : BaseApiController
 {
     private readonly DataContext _context;
 
@@ -24,6 +24,7 @@ public class PlayersController : ControllerBase
         return players;
     }
 
+    [Authorize]
     [HttpGet("{id}")] // /api/players/3 
     public async Task<ActionResult<AppPlayer>> GetPlayer(int id)
     {
