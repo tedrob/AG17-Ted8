@@ -12,14 +12,14 @@ namespace API.Controllers;
 public class AccountController : BaseApiController
 {
     private readonly DataContext _context;
-        private readonly ITokenService _tokenService;
+    private readonly ITokenService _tokenService;
     public AccountController(DataContext context, ITokenService tokenService)
     {
         _tokenService = tokenService;
         _context = context;        
     }
 
-    [HttpPost("register")] // Post: api/account/register
+    [HttpPost("register")] // Post: api/account/register?username=dave&password=p
     public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
     {
 

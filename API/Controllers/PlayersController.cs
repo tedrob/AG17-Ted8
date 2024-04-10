@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
-[Authorize]
+[AllowAnonymous]
 public class PlayersController : BaseApiController
 {
     private readonly DataContext _context;

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240406234838_UserPasswordAdded")]
+    [Migration("20240408201557_UserPasswordAdded")]
     partial class UserPasswordAdded
     {
         /// <inheritdoc />
