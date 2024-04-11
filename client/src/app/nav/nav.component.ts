@@ -4,20 +4,22 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { NgbDropdown, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { Observable, of } from 'rxjs';
-import { User } from '../_models/user';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-nav',
   standalone: true,
-  imports: [FormsModule, HttpClientModule, CommonModule, NgbDropdown, NgbDropdownModule],
+  imports: [FormsModule, HttpClientModule, CommonModule, NgbDropdown,
+      NgbDropdownModule, RouterLink,
+      RouterLinkActive, ToastrModule],
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.css'
 })
 export class NavComponent implements OnInit {
   model: any = {};
 
-  constructor(public accountService: AccountService) { }
+  constructor(public accountService: AccountService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -25,15 +27,15 @@ export class NavComponent implements OnInit {
 
   login() {
     this.accountService.login(this.model).subscribe({
-      next: response => {
-        console.log(response);
-      },
-      error: error => console.log(error)
+      next: _ => this.router.navigateByUrl('/members'),
+      error: error => {
+        this.toastr.error(error.error, '', {positionClass: 'toast-bottom-right'} )},
     })
   }
 
   logout() {
     this.accountService.logout();
+    this.router.navigateByUrl('/');
   }
 
 
