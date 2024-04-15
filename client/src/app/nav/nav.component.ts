@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { NgbDropdown, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 
 @Component({
   selector: 'app-nav',
@@ -19,7 +19,7 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
 export class NavComponent implements OnInit {
   model: any = {};
 
-  constructor(public accountService: AccountService, private router: Router, private toastr: ToastrService) { }
+  constructor(public accountService: AccountService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -27,9 +27,10 @@ export class NavComponent implements OnInit {
 
   login() {
     this.accountService.login(this.model).subscribe({
-      next: _ => this.router.navigateByUrl('/members'),
-      error: error => {
-        this.toastr.error(error.error, '', {positionClass: 'toast-bottom-right'} )},
+      next: _ => {
+        this.router.navigateByUrl('/members');
+        this.model = {}
+      }
     })
   }
 
@@ -37,6 +38,5 @@ export class NavComponent implements OnInit {
     this.accountService.logout();
     this.router.navigateByUrl('/');
   }
-
 
 }
