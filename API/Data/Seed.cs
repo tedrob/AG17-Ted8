@@ -30,4 +30,22 @@ public class Seed
 
         await context.SaveChangesAsync();
     }
+    public static async Task SeedPlayers(DataContext context)
+    {
+        if (await context.Players.AnyAsync()) return;
+
+        var playerData = await File.ReadAllTextAsync("Data/PlayerSeedData.json");
+
+        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+
+        var players = JsonSerializer.Deserialize<List<AppPlayer>>(playerData, options);
+
+        foreach (var player in players)
+        {
+            context.Players.Add(player);
+        }
+
+        await context.SaveChangesAsync();
+
+    }
 }

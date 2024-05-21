@@ -11,7 +11,7 @@ import { MembersService } from 'src/app/_services/members.service';
   standalone: true,
   imports: [CommonModule, RouterModule, TabsModule, GalleryModule],
   templateUrl: './member-detail.component.html',
-  styleUrl: './member-detail.component.css',
+  styleUrls: ['./member-detail.component.css'],
 })
 export class MemberDetailComponent implements OnInit {
   member: Member | undefined;
@@ -32,7 +32,7 @@ export class MemberDetailComponent implements OnInit {
     if (!username) return;
     this.memberService.getMember(username).subscribe({
       next: (member) => {
-        this.member = member,
+        this.member = member
         this.getImages()
       },
     });

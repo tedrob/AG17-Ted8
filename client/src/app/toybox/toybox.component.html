@@ -1,0 +1,126 @@
+<div class="container-fluid">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-2 toybox-item" style="text-align: left">
+        <h2>A list of links</h2>
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+              <h3>
+                <nav
+                  class="nav-pills flex-column"
+                  routerLinkActive="active"
+                  aria-labelledby="fibonacci"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                >
+                  <div>
+                    <a
+                      routerLink="fibonacci"
+                      routerLinkActive="active"
+                      class="nav-link"
+                      style="text-align: left; color: brown"
+                      [routerLinkActiveOptions]="{ exact: true }"
+
+                      >Fibonacci Codes
+                      <hr />
+                    </a>
+                    <a
+                      routerLink="palindrome"
+                      routerLinkActive="active"
+                      class="nav-link"
+                      style="text-align: left; color: brown"
+                      [routerLinkActiveOptions]="{ exact: true }"
+                      >Palindrome Number
+                      <hr />
+                    </a>
+                    <a
+                      routerlink=""
+                      routerLinkActive="active"
+                      class="nav-link disabled"
+                      style="text-align: left"
+                      [routerLinkActiveOptions]="{ exact: true }"
+                      >Lottery Program - disabled
+                      <hr />
+                    </a>
+                  </div>
+                </nav>
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-8 toybox">
+        <router-outlet class="toybox-item"></router-outlet>
+      </div>
+      <div class="col-xs-12 col-sm-2 toybox-item" style="text-align: left">
+        <h2>More links</h2>
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+              <h3>
+                <nav
+                  class="nav-pills flex-column"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  aria-labelledby="simpleinterest"
+                >
+                  <a
+                    routerLink="simpleinterest"
+                    routerLinkActive="active"
+                    class="nav-link"
+                    style="text-align: left; color: brown"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    >Loan Calculator
+                    <hr />
+                  </a>
+                </nav>
+              </h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <h3>
+                <nav
+                  class="nav-pills flex-column"
+                  routerLinkActive="active"
+                  aria-labelledby="gamespart"
+                >
+                  <a
+                    routerLink="gamespart"
+                    routerLinkActive="active"
+                    class="nav-link"
+                    style="text-align: left; color: brown"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    >Tic Tac Toe
+                    <hr />
+                  </a>
+                </nav>
+              </h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <h3>
+                <nav
+                  class="nav-pills flex-column"
+                  routerLinkActive="active"
+                  aria-labelledby="Sudoku"
+                >
+                  <a
+                    routerLinkActive="active"
+                    class="nav-link disabled"
+                    style="text-align: left"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    >Sudoku - disabled
+                    <hr />
+                  </a>
+                </nav>
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br /><br />
+  </div>
+</div>

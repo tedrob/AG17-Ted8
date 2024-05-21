@@ -1,0 +1,23 @@
+<div class="container">
+  <hr />
+  <app-player-start></app-player-start>
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="btn btn-success" (click)="onNewplayer()">
+        New Player
+      </button>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-xs-12" id="left">
+      <app-player-item
+        *ngFor="let playerEl of playerlists let i = index"
+        [player]="playerEl"
+        [index]="i"
+      ></app-player-item>
+    </div>
+  </div>
+  <br />
+  <hr />
+</div>

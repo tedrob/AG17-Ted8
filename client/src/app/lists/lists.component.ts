@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './lists.component.html',
-  styleUrl: './lists.component.css'
+  styleUrls: ['./lists.component.css']
 })
 export class ListsComponent {
 

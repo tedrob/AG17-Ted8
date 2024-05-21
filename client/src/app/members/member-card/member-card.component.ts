@@ -1,20 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { RouterLinkActive, RouterModule } from '@angular/router';
+import { RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
 import { Member } from 'src/app/_models/member';
 
 @Component({
   selector: 'app-member-card',
   standalone: true,
-  imports: [CommonModule, RouterModule, RouterLinkActive ],
+  imports: [CommonModule, RouterModule, RouterLinkActive, RouterOutlet],
   templateUrl: './member-card.component.html',
-  styleUrl: './member-card.component.css',
+  styleUrls: ['./member-card.component.css'],
 })
 export class MemberCardComponent implements OnInit {
-  @Input() member:Member | undefined;
+  @Input() member: Member | undefined;
 
   constructor() {}
 
-  ngOnInit(): void { }
-
+  ngOnInit(): void {}
 }

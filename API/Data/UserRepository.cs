@@ -33,6 +33,20 @@ public class UserRepository : IUserRepository
             .ToListAsync();
     }
 
+    public async Task<PlayerDto> GetPlayerAsync(string username)
+    {
+        return await _context.Users
+            .Where(x => x.UserName == username)
+            .ProjectTo<PlayerDto>(_mapper.ConfigurationProvider)
+            .SingleOrDefaultAsync();
+    }
+
+    public async Task<IEnumerable<PlayerDto>> GetPlayersAsync()
+    {
+        return await _context.Users
+            .ProjectTo<PlayerDto>(_mapper.ConfigurationProvider)
+            .ToListAsync();
+    }
     public async Task<AppUser> GetUserByIdAsync(int id)
     {
         return await _context.Users.FindAsync(id);

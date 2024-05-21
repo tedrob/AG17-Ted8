@@ -1,0 +1,44 @@
+<div class="container showgames-item"><br>
+  <div class="row">
+    <div class="col-sm-12" style="text-align:center"><h2>**The teams you picked**</h2></div>
+  </div><hr>
+
+  <div [formGroup]="gameForm" novalidate>
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="d-xs-12 col-sm-9">
+        <div formArrayName="arrayGame">test 4
+          <div class="row"
+            *ngFor="let gm of gameForm['controls']['arrayGame']['controls']; let i=index"
+              [formGroupName]="i">
+            <div class="col-sm-2">test 5
+              <label><h4>GM-{{i + 1}}</h4></label>
+            </div>
+            <div class="col-sm-10" style="text-align:left;">
+              <button type="button"
+                class="btn btn-block text-capitalize"
+                [class.btn-primary]="gm['controls'].type.value === 'away'"
+                [class.btn-success]="gm['controls'].type.value === 'home'">
+                Team {{ gm['controls'].teamName.value }}
+              </button>
+
+            </div>
+          </div>
+          <div class="row" *ngIf="!submitted" style="text-align:center">
+            <button type="button" class="btn btn-primary text capitalize">away</button>&nbsp;
+            <button type="button" class="btn btn-success text capitalize">home</button>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-sm-1"></div>
+    </div><hr>
+  </div>
+  <div class="row" *ngIf="submitted" style="text-align:center">
+      <div class="col-xs-12 col-sm-12">
+        <h3> The page was refreshed</h3>
+        <h4><p>Re-pick your teams if you`d like</p></h4>
+      </div>
+  </div>
+  <br><br>
+</div>

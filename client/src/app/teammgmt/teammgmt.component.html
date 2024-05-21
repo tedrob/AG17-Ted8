@@ -1,0 +1,65 @@
+<div class="container-fluid">
+  <div class="container">
+    <div class="row">
+      <div
+        class="col-xs-12 col-sm-2 team-item-item"
+        style="text-align: center; background-color: gray"
+      >
+        A list of links on this panel
+        <div class="container">
+          <div class="row">
+            <nav
+              class="nav-pills flex-column"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <div
+                class="col-xs-12 d.sm-inline-block col-md-12 col-lg-12 lg-offset-2"
+              >
+                <a
+                  routerLink="manageteams"
+                  routerLinkActive="active"
+                  class="nav-link"
+                  style="text-align: left; color: antiquewhite"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  >Manage Teams
+                </a>
+                <a
+                  routerLink="schedule"
+                  routerLinkActive="active"
+                  class="nav-link"
+                  style="text-align: left; color: antiquewhite"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  >Schedule
+                </a>
+                <a
+                  routerLink="pickteams"
+                  routerLinkActive="active"
+                  class="nav-link"
+                  style="text-align: left; color: antiquewhite"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  >Pick Teams
+                </a>
+                <a
+                  routerLinkActive="active"
+                  class="nav-link disabled"
+                  style="text-align: left"
+                  >Actual Schedule</a
+                >
+                <a
+                  routerLinkActive="active"
+                  class="nav-link disabled"
+                  style="text-align: left"
+                  >Disabled</a
+                >
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-10 whatif">
+        <router-outlet class="teammgmt-item"></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,14 +3,14 @@ import { inject } from '@angular/core';
 import { AccountService } from '../_services/account.service';
 import { take } from 'rxjs';
 
-export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
+export const JwtInterceptor: HttpInterceptorFn = (req, next) => {
   const accountService = inject(AccountService);
   accountService.currentUser$.pipe(take(1)).subscribe({
-    next: (user) => {
+    next: user => {
       if (user) {
         req = req.clone({
           setHeaders: {
-            Authorization: `Bearer ${user.token}`,
+            Authorization: `Bearer ${user.token}`
           }
         })
       }

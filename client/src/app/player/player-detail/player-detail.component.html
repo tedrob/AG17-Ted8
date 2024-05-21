@@ -1,0 +1,60 @@
+
+<div class="row" *ngIf="player">
+  <div class="col-xs-12 offset-1">
+    <h1>{{ player.desc }}</h1>
+  </div>
+</div>
+<hr>
+<div class="row clearfix">
+  <div class="col-xs-12 col-sm-12 offset-sm-2">before iframe
+    <iframe
+      [src]="getEmbedURL(player)"
+      frameBorder="0"
+      width="460"
+      height="390"
+      title="test"
+      class="iframe clearfix"
+      width="auto"
+      scrolling="no"
+    ></iframe> after played
+  </div>
+  <span
+    ><h5>
+      &nbsp;After song selected played, if another song is not selected,
+      <br />&nbsp;the next song in list will be played!
+    </h5></span
+  ><br />
+</div>
+
+<div class="col-xs-12 offset-1">
+  <div ngbDropdown class="d-inline-block" style="width: auto">
+    <button
+      class="btn btn-primary"
+      id="dropdownMenu"
+      ngbDropdownToggle
+      style="cursor: pointer; color: white"
+    >
+      Manage Player
+    </button>
+    <button
+      ngbDropdownToggle
+      class="btn btn-primary p-1"
+      name="edit"
+      style="cursor: pointer; color: white"
+      (click)="onEditPlayer()"
+    >
+      Edit Player
+    </button>
+    <button
+      ngbDropdownToggle
+      class="btn btn-primary p-1"
+      name="delete"
+      style="cursor: pointer; color: white"
+      (click)="onDeletePlayer()"
+    >
+      Delete Player
+    </button>
+  </div>
+</div>
+<br /><br /><br />
+<br />

@@ -31,7 +31,7 @@ namespace API.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AppPlayers");
+                    b.ToTable("Players");
                 });
 
             modelBuilder.Entity("API.Entities.AppUser", b =>
@@ -55,7 +55,7 @@ namespace API.Data.Migrations
                     b.Property<string>("Gender")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Interest")
+                    b.Property<string>("Interests")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Introduction")

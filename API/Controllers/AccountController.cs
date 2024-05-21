@@ -22,7 +22,6 @@ public class AccountController : BaseApiController
     [HttpPost("register")] // Post: api/account/register?username=dave&password=p
     public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
     {
-
         if (await UserExists(registerDto.Username)) return BadRequest("Username is taken");
 
         using var hmac = new HMACSHA512();
