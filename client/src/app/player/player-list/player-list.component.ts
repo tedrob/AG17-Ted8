@@ -8,6 +8,7 @@ import {
   ActivatedRoute,
   Router,
   RouterLink,
+  RouterLinkActive,
   RouterModule,
 } from '@angular/router';
 import { PlayerStartComponent } from '../player-start/player-start.component';
@@ -24,6 +25,7 @@ import { PlayerEditComponent } from '../player-edit/player-edit.component';
     HomeComponent,
     RouterModule,
     RouterLink,
+    RouterLinkActive,
     PlayerStartComponent,
     PlayerListComponent,
     PlayerDetailComponent,
@@ -53,7 +55,6 @@ export class PlayerListComponent implements OnInit, OnDestroy {
         }
       );
     this.playerlists = this.playerService.getPlayers();
-    console.log('in init player list playerlists count ' + this.playerlists.length);
   }
 
   onNewplayer() {

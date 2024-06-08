@@ -7,7 +7,7 @@ import {
   withViewTransitions,
 } from '@angular/router';
 
-import { routes } from './app.routes';
+import { appRoutes } from './app.routes';
 import { playerRoutes } from './player/player.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
@@ -26,7 +26,7 @@ import { footballishRoutes } from './Footballish/footballish.routes';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(
-      routes,
+      appRoutes,
       withPreloading(PreloadAllModules),
       withInMemoryScrolling({ scrollPositionRestoration: 'enabled' }),
       withViewTransitions()

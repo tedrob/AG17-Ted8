@@ -11,9 +11,9 @@ import {
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { PlayersService } from 'src/app/_services/player.service';
-import { Player } from '../players.model';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PlayerItemComponent } from '../player-list/player-item/player-item.component';
+import { Player } from 'src/app/_models/player';
 
 @Component({
   selector: 'app-player-detail',
@@ -30,9 +30,10 @@ import { PlayerItemComponent } from '../player-list/player-item/player-item.comp
   templateUrl: './player-detail.component.html',
   styleUrls: ['./player-detail.component.css'],
   providers: [PlayersService],
+  host: { click: 'onEditPlayer()' },
 })
 export class PlayerDetailComponent implements OnInit {
-  @Input() player;
+  @Input() player: Player | undefined;
   id!: number;
   urlCache = new Map<string, SafeResourceUrl>();
 
@@ -53,19 +54,18 @@ export class PlayerDetailComponent implements OnInit {
     });
 
     this.playerlists = this.playerService.getPlayers();
-    for (var i = 0; i < this.playerlists.length - 1; i++) {
-      let names = this.playerlists[i].name;
+    for (var i = 0; i < this.playerlists.length; i++) {
+      const names = this.playerlists[i].playerName;
       this.playerlist.push(names);
     }
-    console.log('in onInit detail plist = ' + this.playerlist.length);
   }
 
   getEmbedURL(item) {
-    let z: number = 0;
+    let z: number;
     const playerlist = [];
 
     if (!item) {
-      item = this.playerlists[0];
+      item = this.playerService.getPlayer(0);
     }
 
     for (let i = 0; i < this.playerlists.length; i++) {
@@ -75,35 +75,37 @@ export class PlayerDetailComponent implements OnInit {
       }
     }
 
-
-    if (z > 2) {
-      z++;
-    }
-
-    for (let i = z; i < this.playerlists.length - 1; i++) {
-      item.name = this.playerlist[i].playerName;
+    for (let i = 0; i < this.playerlists.length - 1; i++) {
+      item.name = this.playerlists[i].playerName;
       const names2 = this.playerlist[i].playerName;
       playerlist.push(names2);
+      playerlist.slice(0, 1);
     }
-    z += 6;
-    if (z >= playerlist.length) {
-      playerlist.slice(z-1);
+
+    if (z <= this.playerlist.length) {
+      this.playerlist.slice(z - 1);
     }
+
+    console.log(
+      'after first slice pl = ' +
+        playerlist.length +
+        ' z = ' +
+        z +
+        ' pls = ' +
+        this.playerlists.length
+    );
 
     for (let i = 0; i < z; i++) {
-      if (i === z - 1) {
+      if (i === z) {
         z++;
-        break;
+        //break;
       }
-
+      item.name = this.playerlists[i].playerName;
       const names2 = this.playerlists[i].playerName;
       playerlist.push(names2);
-      playerlist.slice(0, 1);
-      console.log('in playerlist length = ' + playerlist.length + ' z ' + z);
+      this.playerlists.slice(1);
     }
-    z++;
-    playerlist.slice(1);
-    console.log('pl-list after splice = ' + playerlist.length);
+
     let url = this.urlCache.get(item.name);
 
     const lnk1 = item.name;
@@ -113,20 +115,25 @@ export class PlayerDetailComponent implements OnInit {
 
     if (!url) {
       url = this.sanitizer.bypassSecurityTrustResourceUrl(
-        'https://www.youtube.com/embed/' + lnk1 + '?enablejasapi1=1' + lnk2
+        'https://www.youtube.com/embed/' +
+          lnk1 +
+          '?enablejasapi1=1' +
+          lnk2
       );
-      this.urlCache.set(item.name, url);
+      this.urlCache.set(item, url);
     }
     return url;
   }
 
   onEditPlayer() {
-    this.router.navigate(['edit'], { relativeTo: this.route });
-    this.router.navigate(['../', this.id, 'edit'], { relativeTo: this.route });
+    console.log('OnEditPlayer ' + this.id + ' ' + this.player.playerName);
+    this.router.navigate(['edit']); //, { relativeTo: this.route });
+    this.router.navigate(['../player/', 'edit']); //, { relativeTo: this.route });
   }
 
   onDeletePlayer() {
+    console.log('onDeletePlayer');
     this.playerService.deletePlayer(this.id);
-    this.router.navigate(['/player']);
+    this.router.navigate(['/player', 'delete'], { relativeTo: this.route });
   }
 }

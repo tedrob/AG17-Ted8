@@ -1,12 +1,12 @@
 
 <div class="row" *ngIf="player">
   <div class="col-xs-12 offset-1">
-    <h1>{{ player.desc }}</h1>
+    <h1>{{ player.description }}</h1>
   </div>
 </div>
 <hr>
 <div class="row clearfix">
-  <div class="col-xs-12 col-sm-12 offset-sm-2">before iframe
+  <div class="col-xs-12 col-sm-12 offset-sm-2">
     <iframe
       [src]="getEmbedURL(player)"
       frameBorder="0"
@@ -16,7 +16,7 @@
       class="iframe clearfix"
       width="auto"
       scrolling="no"
-    ></iframe> after played
+    ></iframe>
   </div>
   <span
     ><h5>
@@ -38,9 +38,12 @@
     </button>
     <button
       ngbDropdownToggle
+      aria-labelledby="dropdownMenu"
       class="btn btn-primary p-1"
+      form="playerForm"
       name="edit"
       style="cursor: pointer; color: white"
+      type="submit"
       (click)="onEditPlayer()"
     >
       Edit Player

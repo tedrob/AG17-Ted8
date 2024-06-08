@@ -310,11 +310,13 @@ export class FootballService {
 
   addArrayFormGames(pickedTeams: any) {
     this.arrayForm = this.formBuilder.array([]);
+    console.log(pickedTeams);
+    console.log(' of ' + pickedTeams['controls']['week']);
+
     this.arrayForm.push(pickedTeams);
     for (let index = 0; index < pickedTeams.length-1; index++) {
       this.arrayForm.push(pickedTeams);
     }
-    console.log('in add arraygames ' + this.arrayForm.length + ' teams ' + pickedTeams.length);
   }
 
   setCurWeek(wk: number) {

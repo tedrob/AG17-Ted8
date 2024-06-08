@@ -10,11 +10,12 @@ import {
 } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { FootballService } from 'src/app/Footballish/football.service';
+import { PickteamsComponent } from '../pickteams.component';
 
 @Component({
   selector: 'app-showgamespicked',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule, PickteamsComponent],
   templateUrl: './showgamespicked.component.html',
   styleUrl: './showgamespicked.component.css',
   providers: [FootballService, DatePipe],
@@ -23,16 +24,10 @@ export class ShowgamespickedComponent implements OnInit {
   gameForm: FormGroup;
   arrayForm = this.formBuilder.array([]);
   arrayForm1;
-  arrayForm2 = this.arrayForm;
-
   submitted = false;
 
   constructor(private formBuilder: FormBuilder, private fs: FootballService) {
-    this.arrayForm2 = this.fs.getCurWeekplayed();
-    console.log('test played ' + this.arrayForm2);
     this.arrayForm1 = this.fs.getArrayFromGames();
-
-    console.log('return from fs ' + this.arrayForm1.length);// + ' ' +  this.arrayForm2.length)
   }
 
   ngOnInit() {
@@ -41,7 +36,7 @@ export class ShowgamespickedComponent implements OnInit {
 
   createForm() {
     this.gameForm = this.formBuilder.group({
-      arrayGame: this.initGameFormArray(),
+      arrayGame: this.initGameFormArray()
     });
   }
 
@@ -66,13 +61,12 @@ export class ShowgamespickedComponent implements OnInit {
         });
         arrayForm2.push(group);
       }
-      // console.log('arr2', arrayForm2);
       return arrayForm2;
     }
-    return null;
+    return arrayForm2;
   }
   initModelFormGroup() {
-    const model = this.formBuilder.group({
+    var model = this.formBuilder.group({
       week: new FormControl(null), // 0,
       type: new FormControl(null), // '',
       teamNo: new FormControl(null), // '',
@@ -82,9 +76,6 @@ export class ShowgamespickedComponent implements OnInit {
   }
 
   get arrayGame(): FormArray {
-    // console.log('get', this.arrayGame.get('arrayGame') as FormArray);
-    var test = this.fs.getArrayFromGames();
-    console.log('test get '+ test);
     return this.arrayGame.get('arrayGame') as FormArray;
   }
 }

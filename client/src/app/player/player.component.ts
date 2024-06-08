@@ -14,6 +14,7 @@ import { PlayersService } from '../_services/player.service';
 import { AccountService } from '../_services/account.service';
 import { User } from '../_models/user';
 import { Player } from './players.model';
+import { PlayerEditComponent } from './player-edit/player-edit.component';
 
 @Component({
   selector: 'app-player',
@@ -24,6 +25,8 @@ import { Player } from './players.model';
     PlayerListComponent,
     PlayerItemComponent,
     PlayerDetailComponent,
+    PlayerEditComponent,
+    PlayerItemComponent,
     RouterOutlet,
     RouterLink,
     RouterLinkActive,

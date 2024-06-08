@@ -1,34 +1,15 @@
-.board {
+.cell {
+  width: 100px;
+  height: 100px;
+  box-sizing: border-box;
+  border: 3px solid #f4af78;
+  font-size: 5em;
+  font-family: 'Gochi Hand', sans-serif;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  background-color: #a45632;
-  color: #fff;
+  justify-content: center;
+  align-items: center;
 }
 
-.gameStatus {
-  margin: 0px;
-  padding: 15px;
-  background-color: #34495e;
-  color: #fff;
-  font-size: 1.4em;
-  font-weight: bold;
-  text-align: center;
-}
-
-.restart {
-  background-color: #34495e;
-  color: #fff;
-  border: 0px;
-  font-family: 'Dosis', Helvetica, sans-serif;
-  font-size: 1.4em;
-  font-weight: bold;
-  margin: 0px;
-  padding: 15px;
-  width: 100%;
-}
-.restart:hover {
-  background-color: #c1cdcd;
-  cursor: pointer;
+.cell:hover {
+    background-color: #c1cdcd;
 }

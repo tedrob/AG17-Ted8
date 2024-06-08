@@ -1,14 +1,9 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  HostListener,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { GalleryItem, GalleryModule } from 'ng-gallery';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { ToastrService } from 'ngx-toastr';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs';
 import { Member } from 'src/app/_models/member';
 import { User } from 'src/app/_models/user';
@@ -18,7 +13,7 @@ import { MembersService } from 'src/app/_services/members.service';
 @Component({
   selector: 'app-member-edit',
   standalone: true,
-  imports: [CommonModule, TabsModule, GalleryModule, FormsModule],
+  imports: [CommonModule, TabsModule, GalleryModule, FormsModule, ToastrModule],
   templateUrl: './member-edit.component.html',
   styleUrls: ['./member-edit.component.css'],
   providers: [ToastrService],
@@ -60,7 +55,7 @@ export class MemberEditComponent implements OnInit {
   updateMember() {
     this.memberService.updateMember(this.editForm?.value).subscribe({
       next: (_) => {
-        this.toastr.success('profile updated successfully', '', {
+        this.toastr.success('Profile updated successfully', '', {
           positionClass: 'toast-bottom-right',
         });
         this.editForm?.reset(this.member);

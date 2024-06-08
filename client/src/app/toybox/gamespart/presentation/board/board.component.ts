@@ -61,7 +61,6 @@ export class BoardComponent implements OnInit{
     this.player = 'X';
     this.winner = null;
     this.turn = `Player ${this.player}'s turn`;
-    console.log('end of button push');
   }
 
 }

@@ -30,9 +30,9 @@ import { SimpleinterestComponent } from './toybox/simpleinterest/simpleinterest.
 import { GamespartComponent } from './toybox/gamespart/gamespart.component';
 import { ShowgamespickedComponent } from './teammgmt/pickteams/showgamespicked/showgamespicked.component';
 
-export const routes: Routes = [
+export const appRoutes: Routes = [
   { path: '', component: HomeComponent },
-
+  { path: '', redirectTo: './', pathMatch: 'full' },
   {
     path: '',
     runGuardsAndResolvers: 'always',
@@ -49,38 +49,17 @@ export const routes: Routes = [
       },
       { path: 'lists', title: 'lists', component: ListsComponent },
       { path: 'messages', component: MessagesComponent },
-      { path: 'player/new', component: PlayerEditComponent },
-      { path: 'player/edit', component: PlayerEditComponent },
-      { path: 'player/:id', component: PlayerDetailComponent },
-
+      //{ path: 'player', loadChildren: () => PlayersRoutingModule },
+      { path: 'player/new', component: PlayerEditComponent, pathMatch: 'full' },
       {
-        path: 'player',
-        component: PlayerComponent,
-        runGuardsAndResolvers: 'always',
-        canActivate: [authGuard],
-        children: [
-          { path: 'player', title: 'Start', component: PlayerStartComponent },
-          {
-            path: 'player/new',
-            title: 'Player new',
-            component: PlayerEditComponent,
-          },
-          {
-            path: 'player/edit',
-            title: 'Player edit',
-            component: PlayerEditComponent,
-          },
-          {
-            path: 'player/id',
-            title: 'Player Detail',
-            component: PlayerDetailComponent,
-          },
-          {
-            path: 'player/new',
-            title: 'Edit Player',
-            component: PlayerEditComponent,
-          },
-        ],
+        path: 'player/edit',
+        component: PlayerEditComponent,
+        pathMatch: 'full',
+      },
+      {
+        path: 'player/:id',
+        component: PlayerDetailComponent,
+        pathMatch: 'full',
       },
       {
         path: 'toybox',
@@ -183,7 +162,7 @@ export const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(appRoutes, { useHash: true }),
     RouterModule.forChild(playerRoutes),
     RouterModule.forChild(teammgmtRoutes),
     RouterModule.forChild(toyboxRoutes),

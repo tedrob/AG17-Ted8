@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Subject, take } from 'rxjs';
+import { Subject, map, of, take } from 'rxjs';
 import { User } from '../_models/user';
 import { UserParams } from '../_models/userParams';
 import { AccountService } from './account.service';
@@ -33,8 +33,10 @@ export class PlayersService {
       },
     });
   }
-
+//Wj-YAjrBz84
   playerlists: Player[] = [
+    new Player('Wj-YAjrBz84', 'Charlie Wilson - Superman '),
+    new Player('HhSB53Nhj_8', 'Lila Where I"m Coming From'),
     new Player('XoiOOiuH8iI', 'Tyla-Water'),
     new Player('YaxGNQE5ZLA', 'Star-Spangled Banner As Never Heard I'),
     new Player('LgPpowVNEfE', 'Musiq - So beautiful'),
@@ -57,6 +59,7 @@ export class PlayersService {
     new Player('seZMOTGCDag', 'Jack Johnson - Better Togeher'),
     new Player('xpVfcZ0ZcFM', 'Drake - God`s Plan'),
     new Player('3NKeffFYWno', 'Jhene Aiko - Unreleased'),
+    new Player('GjrFonwnqLE', 'Tyla-Butterflies'),
     new Player('EtJy69cEOtQ', 'How to Learn Anything'),
     new Player('BxY_eJLBflk', 'Put God First - Denzel Washington'),
     new Player('g-jwWYX7Jlo', 'Dream Motivational'),
@@ -73,21 +76,7 @@ export class PlayersService {
     new Player('kXIX5vHYjiM', 'Funky Uplifting'),
     new Player('coue17TmnrA', 'Funky Uplifting R&B Mix'),
     new Player('hifl-h1FXek', 'Teddy Love TKO'),
-    new Player('SGqg_ZzThDU', 'Black Coffee Salle'),
-    new Player('5ceVFLfGdAo', 'Superman is a DJ'),
     new Player('m_qewI-1cEs', 'Honey Dijon Boiler Room'),
-    new Player('8WYHDfJDPDc', 'NellyVille'),
-    new Player('J7HwVIGWBls', 'Backyard Southern Soul'),
-    new Player('ICXNWceWRB0', 'Man in the Mirror'),
-    new Player('HhSB53Nhj_8', 'Lila Where I"m Coming From'),
-    new Player('1km-F2DVgjs', 'Moms Mabley'),
-    new Player('QFUif6T5xiI', 'Witney Houston'),
-    new Player('lOqSQgHUWW4', 'Trevor Noah'),
-    new Player('aOrmjpToyMk', 'Smooth Jazz'),
-    new Player('D0mgk0KgI0Q', 'Silent Night - Temptations'),
-    new Player('79UWvR734wI', 'InfoOnDif-MVC-Net-Core'),
-    new Player('fyGSyqEX2dw', 'Don"t imitate me JavaScript'),
-    new Player('GjrFonwnqLE', 'Tyla-Butterflies'),
   ];
 
   getUserParams() {
@@ -102,25 +91,27 @@ export class PlayersService {
     return this.playerlists.slice();
   }
 
+  /* getPlayers() {
+    if (this.playerlists.length > 0) return of(this.playerlists);
+    return this.http.get<Player[]>(this.baseUrl + 'users/').pipe(
+      map(players => {
+        this.players = players;
+        return players;
+      })
+    )
+  } */
+
+  // getPlayer(username: string) {
+  //   const player = this.players.find((x) => x.userName === username);
+  //   if pla
+  // }
+
   getPlayer(index: number) {
     return this.playerlists[index];
   }
 
   addPlayer(player: Player) {
-    console.log(
-      'in player service add ' + player.name + this.playerlists.length
-    );
     this.playerlists.push(player);
-    console.log(
-      'in player service after  add ' +
-        player.name +
-        ' ' +
-        this.playerlists.length +
-        ' ' +
-        this.playerlists[this.playerlists.length - 1].name +
-        ' DESC ' +
-        this.playerlists[this.playerlists.length - 1].desc
-    );
     this.playerChanged.next(this.playerlists.slice());
   }
 

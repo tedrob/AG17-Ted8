@@ -6,6 +6,7 @@ import { FibonacciComponent } from './fibonacci/fibonacci.component';
 import { SimpleinterestComponent } from './simpleinterest/simpleinterest.component';
 import { PalindromeComponent } from './palindrome/palindrome.component';
 import { GamespartComponent } from './gamespart/gamespart.component';
+import { CommonModule } from '@angular/common';
 
 export const toyboxRoutes: Routes = [
   {
@@ -43,7 +44,7 @@ export const toyboxRoutes: Routes = [
   },
 ];
 @NgModule({
-  imports: [RouterModule.forChild(toyboxRoutes)],
+  imports: [CommonModule,RouterModule.forChild(toyboxRoutes)],
   exports: [RouterModule],
 })
 export class ToyboxRoutingModule {}

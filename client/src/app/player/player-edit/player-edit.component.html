@@ -1,44 +1,65 @@
+<div class="col-4 offset-1">
+  <h1>Your player edit</h1>
+</div>
+<div class="col-12 offset-1">
+  <div class="alert alert-info pb-0" *ngIf="playerForm.dirty">
+    <p>
+      <strong
+        >Information: You have made Changes. Any unsaved changes will be
+        lost</strong
+      >
+    </p>
+  </div>
+</div>
 <div class="row">
   <div class="col-xs-12 offset-1">
-    <form [formGroup]="playerForm" (ngSubmit)="onSubmit()">
+    <form #playerForm="ngForm" id="playerForm"  (ngSubmit)="updatePlayer()">
       <div class="row">
         <div class="col-xs-12">
           <button
             type="submit"
+            [disabled]="!playerForm.dirty"
+            form="playerForm"
             class="btn btn-success"
-            [disabled]="!playerForm.valid">Save</button>
-          <button
-            type="button"
-            class="btn btn-danger"
-            (click)="onCancel()">Cancel</button>
+          >
+            Save
+          </button>
+          <button type="button" class="btn btn-danger" (click)="onCancel()">
+            Cancel
+          </button>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
             <label for="name">Name</label>
-            <input
+            <textarea
               type="text"
-              id="name"
-              formControlName="name"
-              class="form-control">
+              class="form-control"
+              [(ngModel)]="player.playerName"
+              name="playerName"
+              rows="1"
+            ></textarea>
           </div>
         </div>
       </div>
       <div class="row">
-          <div class="col-xs-12">
-            <div class="form-group">
-              <label for="description">Description</label>
-              <textarea
-                type="text"
-                id="description"
-                formControlName="description"
-                class="form-control"
-                rows="3"></textarea>
-            </div>
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea
+              type="text"
+              id="description"
+              formControlName="description"
+              name="description"
+              class="form-control"
+              [(ngModel)]="player.description"
+              rows="1"
+            ></textarea>
           </div>
         </div>
+      </div>
     </form>
   </div>
 </div>
-<br><br>
+<br /><br />

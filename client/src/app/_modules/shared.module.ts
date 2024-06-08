@@ -7,6 +7,7 @@ import { PlayerComponent } from '../player/player.component';
 import { ToastrModule } from 'ngx-toastr';
 import { FootballishComponent } from '../Footballish/Footballish.component';
 import { ToyboxComponent } from '../toybox/toybox.component';
+import { TeammgmtComponent } from '../teammgmt/teammgmt.component';
 @NgModule({
   declarations: [],
   imports: [
@@ -19,18 +20,20 @@ import { ToyboxComponent } from '../toybox/toybox.component';
     NgxSpinnerModule.forRoot({
       type: 'line-scale-party',
     }),
-    PlayerComponent,
     FootballishComponent,
+    PlayerComponent,
     ToyboxComponent,
+    TeammgmtComponent,
   ],
   exports: [
-    TabsModule,
-    NgxSpinnerModule,
-    PlayerComponent,
-    ToastrModule,
     BsDropdownModule,
+    TabsModule,
+    ToastrModule,
+    NgxSpinnerModule,
     FootballishComponent,
+    PlayerComponent,
     ToyboxComponent,
+    TeammgmtComponent,
   ],
 })
 export class SharedModule {}

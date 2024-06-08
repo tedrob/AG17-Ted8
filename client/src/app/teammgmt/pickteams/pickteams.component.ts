@@ -1,6 +1,6 @@
 import { CommonModule, DatePipe } from '@angular/common';
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, OnChanges, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { FootballService } from 'src/app/Footballish/football.service';
 import { WeeklyGame } from 'src/app/Footballish/football-teams.model';
@@ -41,10 +41,14 @@ export class PickteamsComponent implements OnInit, OnChanges {
     private router: Router
   ) {}
 
-  ngOnChanges(changes: SimpleChanges) {}
-
-  ngOnInit() {
-    this.createForm();
+  initModelFormGroup() {
+    const model = this.formBuilder.group({
+      week: new FormControl(null), // 0,
+      type: new FormControl(null), // '',
+      teamNo: new FormControl(null), // '',
+      teamName: new FormControl(null), // ''
+    });
+    return model;
   }
 
   createForm() {
@@ -60,7 +64,7 @@ export class PickteamsComponent implements OnInit, OnChanges {
   initWeekFormArray() {
     const arrayForm = this.formBuilder.array([]);
     for (let i = 0; i < 8; i++) {
-      const group: any = this.initWeekFormGroup();
+      let group: any = this.initWeekFormGroup();
       group.patchValue({
         away: {
           'type': '',
@@ -72,8 +76,6 @@ export class PickteamsComponent implements OnInit, OnChanges {
           'teamNo': this.teamsH[i].teamnumber,
           'teamName': this.teamsH[i].name,
         },
-
-
       });
       arrayForm.push(group);
     }
@@ -113,19 +115,12 @@ export class PickteamsComponent implements OnInit, OnChanges {
     ctrl.controls[i].get('type').markAsTouched();
   }
 
-  initModelFormGroup() {
-    const model = this.formBuilder.group({
-      week: new FormControl(null), // 0,
-      type: new FormControl(null), // '',
-      teamNo: new FormControl(null), // '',
-      teamName: new FormControl(null), // ''
-    });
-    return model;
+  get gameMethod(): FormArray {
+    return this.gameMethod.get('gameMethod') as FormArray;
   }
 
   onSubmit() {
     this.submitted = true;
-    console.log('onSubmit games length ' + this.weekForm.controls['gameMethod']['controls'].length)
     const lnth = this.weekForm.controls['gameMethod']['controls'].length;
     const week = this.weekForm.controls['week'].value;
     const arrayForm = this.formBuilder.array([]);
@@ -134,12 +129,9 @@ export class PickteamsComponent implements OnInit, OnChanges {
     let wktype;
     let wkteam;
     this.weeksGames.splice(0, this.weeksGames.length);
-
-    console.log('controls lnth ' + lnth);
     for (let i = 0; i < lnth; i++) {
       wktype = this.weekForm.controls['gameMethod']['controls'][i].get('type').value;
-      console.log('wktype ' + wktype);
-      const group:any = this.initModelFormGroup();
+      const group: any = this.initModelFormGroup();
       if (wktype === 'home') {
         team = this.weekForm.controls['gameMethod']['controls'][i];
         wkteam = team.controls.home['controls'].teamName.value;
@@ -163,13 +155,16 @@ export class PickteamsComponent implements OnInit, OnChanges {
       }
     }
     this.fs.addArrayFormGames(arrayForm);
-    //var list = this.fs.getArrayFromGames();
-    //console.log(' list returned '+ list.controls['gameMethod']['controls']);
-    console.log(' list arrayForm '+ arrayForm.length);
-
     this.weekForm.reset();
     this.createForm();
     this.router.navigate(['../showgames'], {relativeTo: this.route});
   }
 
+  ngOnInit() {
+    this.createForm();
+  }
+
+  ngOnChanges() {
+    this.weekForm.reset();
+  }
 }
